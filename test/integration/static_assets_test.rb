@@ -12,4 +12,14 @@ class StaticAssetsTest < ActionDispatch::IntegrationTest
       assert_match "Bootstrap: #{filename}.js", page.body
     end
   end
+
+  test "less file" do
+    visit "/assets/test-less.css"
+    assert_match ".test-less {", page.body
+  end
+
+  test "sass file" do
+    visit "/assets/test-sass.css"
+    assert_match ".test-sass {", page.body
+  end
 end

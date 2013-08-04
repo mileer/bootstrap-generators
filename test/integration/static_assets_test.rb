@@ -13,13 +13,13 @@ class StaticAssetsTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "less file" do
-    visit "/assets/test-less.css"
-    assert_match ".test-less {", page.body
+  test "provides bootstrap.scss on the asset pipeline" do
+    visit "/assets/test-sass.css"
+    assert_match "* Bootstrap v", page.body
   end
 
-  test "sass file" do
-    visit "/assets/test-sass.css"
-    assert_match ".test-sass {", page.body
+  test "provides bootstrap.less on the asset pipeline" do
+    visit "/assets/test-less.css"
+    assert_match "* Bootstrap v", page.body
   end
 end

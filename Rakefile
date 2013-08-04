@@ -45,12 +45,25 @@ namespace :bootstrap do
       }
     end
 
+    if File.exists?('tmp/sass-twitter-bootstrap')
+      # TODO: Update SASS Twitter Bootstrap repository
+    else
+      # Clone SASS Twitter Bootstrap repository
+      Dir.chdir('tmp') {
+        Git.clone('https://github.com/jlong/sass-twitter-bootstrap', 'sass-twitter-bootstrap')
+      }
+    end
+
     # Reset Twitter Bootstrap JS files
     FileUtils.rm Dir.glob('vendor/assets/javascripts/bootstrap/*.js')
     FileUtils.cp Dir.glob('tmp/bootstrap/js/*.js'), 'vendor/assets/javascripts/bootstrap'
 
     # Reset Twitter Bootstrap LESS files
-    FileUtils.rm Dir.glob('vendor/twitter/bootstrap/less/*.js')
+    FileUtils.rm Dir.glob('vendor/twitter/bootstrap/less/*.less')
     FileUtils.cp Dir.glob('tmp/bootstrap/less/*.less'), 'vendor/twitter/bootstrap/less'
+
+    # Reset Twitter Bootstrap SASS files
+    FileUtils.rm Dir.glob('vendor/twitter/bootstrap/sass/*.scss')
+    FileUtils.cp Dir.glob('tmp/sass-twitter-bootstrap/lib/*.scss'), 'vendor/twitter/bootstrap/sass'
   end
 end

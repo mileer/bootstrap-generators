@@ -1,3 +1,5 @@
+require 'rails/generators'
+
 module Bootstrap
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
